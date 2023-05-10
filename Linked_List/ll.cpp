@@ -16,6 +16,20 @@ public:
         this->data = data;
         this->next = NULL;
     }
+
+    // destructor
+
+    ~Node()
+    {
+        int val = this->data;
+        if (this->next != NULL)
+        {
+            delete next;
+            this->next = NULL;
+        }
+
+        cout << "Memory is free for node with data " << val << endl;
+    }
 };
 
 // insert at head of list
@@ -67,8 +81,9 @@ void insertAtPosition(Node *&head, Node *&tail, int data, int p)
         cnt++;
         tempNode = tempNode->next;
     }
-    //checking and updating tail if it's last position of the list
-    if(tempNode ->next == NULL){
+    // checking and updating tail if it's last position of the list
+    if (tempNode->next == NULL)
+    {
         insertAtTail(tail, data);
         return;
     }
@@ -78,9 +93,44 @@ void insertAtPosition(Node *&head, Node *&tail, int data, int p)
     Node *newNode = new Node(data);
     newNode->next = tempNode->next;
     tempNode->next = newNode;
+}
 
+// Delete at given position of the list
 
+void deleteAtPosition(Node *&head, Node *&tail, int p)
+{
 
+    // deleting first node if p = 1
+    if (p == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+
+    // deleting if the node is somewhere in middle or in the end of the list
+    else
+    {
+        Node *curr = head;
+        Node *prev = NULL;
+
+        int cnt = 1;
+
+        while (cnt < p)
+        {
+            prev = curr;
+            curr = curr->next;
+
+            cnt++;
+            curr->next != NULL;
+        }
+
+        prev->next = curr->next;
+        curr->next = NULL;
+        delete curr;
+    }
 }
 
 void printLL(Node *&head)
@@ -104,12 +154,14 @@ int main()
 
     printLL(head);
 
-    insertAtPosition(head, tail ,88, 3);
-    insertAtPosition(head, tail ,87, 4);
-
-
+    insertAtPosition(head, tail, 88, 3);
+    insertAtPosition(head, tail, 87, 4);
 
     printLL(head);
-    cout<<tail->data << endl;
+    // cout<<tail->data << endl;
+
+    deleteAtPosition(head, tail, 2);
+    printLL(head);
+
     return 0;
 }
