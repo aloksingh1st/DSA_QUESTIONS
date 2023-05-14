@@ -68,6 +68,59 @@ void Reverse(Node * &head, int len){
 Node *getListAfterReverseOperation(Node *head, int n, int b[]){
     
 	// Write your code here.
+    stack<int>s;
+
+    Node* ptr=head;
+
+    Node* dummy=new Node(-1);
+
+    Node* temp=dummy;
+
+    for(int i=0;i<n;i++)
+
+    {
+
+        while(b[i]!=0 && ptr!=NULL)
+
+        {
+
+           s.push(ptr->data);
+
+           ptr=ptr->next;
+
+           b[i]--;
+
+        }
+
+        while(!s.empty())
+
+        {
+
+           Node* x=new Node(s.top());
+
+           s.pop();
+
+           temp->next=x;
+
+           temp=temp->next;
+
+        }
+
+    }
+
+    while(ptr!=NULL)
+
+    {
+
+        temp->next=ptr;
+
+        ptr=ptr->next;
+
+        temp=temp->next;
+
+    }
+
+    return dummy->next;
 }
 
 
