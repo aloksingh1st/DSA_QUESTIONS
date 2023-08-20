@@ -50,7 +50,7 @@ void printLL(ListNode *&head)
 }
 
 
-void Reverse(ListNode * &head){
+ListNode * Reverse(ListNode * &head){
     ListNode* current = head;
     ListNode* prev = NULL, *next = NULL;
 
@@ -61,14 +61,14 @@ void Reverse(ListNode * &head){
         current = next;
     }
 
-    head = prev;
+    return prev;
 }
 
 
 ListNode *lastAppearance(ListNode *head) { 
 	// Write your code here.
-  head = Reverse(head);
 
+    head = Reverse(head); 
   unordered_map<int, int> m;
 
   ListNode *temp = head;
@@ -91,21 +91,21 @@ ListNode *lastAppearance(ListNode *head) {
 
 int main(){
 
-    ListNode * head = new ListNode(10);
+    ListNode * head = new ListNode(7);
+    // insertAtHead(head, 7);
     insertAtHead(head, 11);
-    insertAtHead(head, 12);
     insertAtHead(head, 13);
-    insertAtHead(head, 14);
-    insertAtHead(head, 15);
+    insertAtHead(head, 23);
+    insertAtHead(head, 7);
+    insertAtHead(head, 11);
+    insertAtHead(head, 13);
 
 
     // LastNode(head)->data<<"--------------------------------"<<endl;
 
-    printLL(head);
+    ListNode *newHead = lastAppearance(head);
 
-    Reverse(head);
-
-    printLL(head);
+    printLL(newHead);
 
 
 
