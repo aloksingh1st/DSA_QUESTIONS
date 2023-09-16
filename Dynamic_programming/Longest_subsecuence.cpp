@@ -1,4 +1,7 @@
 #include <bits/stdc++.h>
+
+
+//checking the streak working with this repo
 class Solution {
 private: 
     bool check(string &s, int i, int j){
