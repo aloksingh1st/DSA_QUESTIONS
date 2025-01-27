@@ -46,6 +46,27 @@ public:
         // Recur on the left and right subtrees
         return search(root->left, data) || search(root->right, data);
     }
+
+    int height(TreeNode *root)
+    {
+        if (root == nullptr)
+            return 0;
+        return 1 + max(height(root->left), height(root->right));
+    }
+
+    // Function to print all nodes at a given level
+    void printLevel(TreeNode *root, int level)
+    {
+        if (root == nullptr)
+            return;
+        if (level == 1)
+            cout << root->val << " ";
+        else
+        {
+            printLevel(root->left, level - 1);
+            printLevel(root->right, level - 1);
+        }
+    }
 };
 
 // Example usage (commented for LeetCode-style submission):
